@@ -1,6 +1,6 @@
 package com.example.demo.service.iplm;
 
-import com.example.demo.model.User;
+import com.example.demo.model.user.User;
 import com.example.demo.repository.user.UserRepository;
 import com.example.demo.service.interservice.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +31,10 @@ public class UserService implements IUserService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User checkApplication(Long id) {
+        return this.userRepository.findById(id).get();
     }
 }
