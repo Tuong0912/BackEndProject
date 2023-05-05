@@ -23,9 +23,10 @@ public class CityService implements ICityService {
     }
 
     @Override
-    public void add(City city) {
-        iCityRepository.save(city);
+    public City add(City city) {
+        return this.iCityRepository.save(city);
     }
+
 
     @Override
     public void delete(Long id) {

@@ -24,13 +24,13 @@ public class EnterpriseController {
     }
 
     @PostMapping("create")
-    ResponseEntity<Void> addNewEnterprise(@RequestBody Enterprise enterprise) {
+    ResponseEntity<Enterprise> addNewEnterprise(@RequestBody Enterprise enterprise) {
         this.iEnterpriseService.add(enterprise);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("update/{id}")
-    ResponseEntity<Void> updateEnterprise(@PathVariable Long id, @RequestBody Enterprise enterprise) {
+    ResponseEntity<Enterprise> updateEnterprise(@PathVariable Long id, @RequestBody Enterprise enterprise) {
         if (this.iEnterpriseService.findById(id).isPresent()) {
             this.iEnterpriseService.add(enterprise);
             return new ResponseEntity<>(HttpStatus.OK);
@@ -41,5 +41,11 @@ public class EnterpriseController {
     @PatchMapping("/{id}")
     ResponseEntity<Optional<Enterprise>> findById(@PathVariable Long id) {
         return new ResponseEntity<>(this.iEnterpriseService.findById(id), HttpStatus.OK);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        this.iEnterpriseService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

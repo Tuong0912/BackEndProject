@@ -22,7 +22,7 @@ public class CityController {
     }
 
     @PostMapping()
-    ResponseEntity<Void> createNewCity(@RequestBody City city) {
+    ResponseEntity<City> createNewCity(@RequestBody City city) {
         this.iCityService.add(city);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -39,7 +39,7 @@ public class CityController {
     }
 
     @PutMapping("update/{id}")
-    ResponseEntity<Void> updateCity(@PathVariable Long id, @RequestBody City city) {
+    ResponseEntity<City> updateCity(@PathVariable Long id, @RequestBody City city) {
         if (this.iCityService.findById(id).isPresent()) {
             this.iCityService.add(city);
             return new ResponseEntity<>(HttpStatus.OK);

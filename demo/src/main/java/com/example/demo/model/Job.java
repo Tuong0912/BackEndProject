@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Lazy;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,22 +16,22 @@ public class Job {
     private Long id;
     @ManyToOne
     private Enterprise enterprise;
-    private String name;
-    @ManyToOne
-    private Salary Salary;
+
+    private double minSalary;
+    private double maxSalary;
     private LocalDate postDate;
-    private Date expriteDate;
+    private LocalDate expriteDate;
     private String experience;
     private String content;
-    @ManyToOne
-    private Description description;
+
+    private String shortDescription;
+    private String longDescription;
 
     private String src;
     private Boolean status = false;
     @ManyToOne
     private Qualification qualification;
     @ManyToOne
-    @JsonIgnore
     private ProgramingLanguage programingLanguage;
     @ManyToOne
     @Lazy
@@ -39,16 +40,17 @@ public class Job {
     public Job() {
     }
 
-    public Job(Long id, Enterprise enterprise, String name, com.example.demo.model.Salary salary, LocalDate postDate, Date expriteDate, String experience, String content, Description description, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
+    public Job(Long id, Enterprise enterprise, double minSalary, double maxSalary, LocalDate postDate, LocalDate expriteDate, String experience, String content, String shortDescription, String longDescription, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
         this.id = id;
         this.enterprise = enterprise;
-        this.name = name;
-        Salary = salary;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
         this.postDate = postDate;
         this.expriteDate = expriteDate;
         this.experience = experience;
         this.content = content;
-        this.description = description;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
         this.src = src;
         this.status = status;
         this.qualification = qualification;
@@ -72,20 +74,21 @@ public class Job {
         this.enterprise = enterprise;
     }
 
-    public String getName() {
-        return name;
+
+    public double getMinSalary() {
+        return minSalary;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMinSalary(double minSalary) {
+        this.minSalary = minSalary;
     }
 
-    public com.example.demo.model.Salary getSalary() {
-        return Salary;
+    public double getMaxSalary() {
+        return maxSalary;
     }
 
-    public void setSalary(com.example.demo.model.Salary salary) {
-        Salary = salary;
+    public void setMaxSalary(double maxSalary) {
+        this.maxSalary = maxSalary;
     }
 
     public LocalDate getPostDate() {
@@ -96,11 +99,11 @@ public class Job {
         this.postDate = postDate;
     }
 
-    public Date getExpriteDate() {
+    public LocalDate getExpriteDate() {
         return expriteDate;
     }
 
-    public void setExpriteDate(Date expriteDate) {
+    public void setExpriteDate(LocalDate expriteDate) {
         this.expriteDate = expriteDate;
     }
 
@@ -120,12 +123,20 @@ public class Job {
         this.content = content;
     }
 
-    public Description getDescription() {
-        return description;
+    public String getShortDescription() {
+        return shortDescription;
     }
 
-    public void setDescription(Description description) {
-        this.description = description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getLongDescription() {
+        return longDescription;
+    }
+
+    public void setLongDescription(String longDescription) {
+        this.longDescription = longDescription;
     }
 
     public String getSrc() {

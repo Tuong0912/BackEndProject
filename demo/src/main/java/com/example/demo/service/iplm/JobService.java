@@ -25,8 +25,8 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public void add(Job job) {
-        iJobRepository.save(job);
+    public Job add(Job job) {
+        return iJobRepository.save(job);
     }
 
     @Override

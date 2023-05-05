@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class ProgramingLanguageService implements IProgramingLanguageService {
     @Autowired
@@ -23,8 +24,8 @@ public class ProgramingLanguageService implements IProgramingLanguageService {
     }
 
     @Override
-    public void add(ProgramingLanguage programingLanguage) {
-        iProgramingLanguageRepo.save(programingLanguage);
+    public ProgramingLanguage add(ProgramingLanguage programingLanguage) {
+        return iProgramingLanguageRepo.save(programingLanguage);
     }
 
     @Override

@@ -18,11 +18,12 @@ public class JobController {
 
     @GetMapping
     public ResponseEntity<Iterable<Job>> findAll() {
-        return new ResponseEntity<>( this.iJobService.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(this.iJobService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createNewJob(@RequestBody Job job) {
+    public ResponseEntity<Job> createNewJob(@RequestBody Job job) {
+        job.setPostDate(java.time.LocalDate.now());
         this.iJobService.add(job);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -33,7 +34,7 @@ public class JobController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<Void> updateJob(@PathVariable Long id, @RequestBody Job job) {
+    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job) {
         if (this.iJobService.findById(id).isPresent()) {
             this.iJobService.add(job);
             return new ResponseEntity<>(HttpStatus.OK);

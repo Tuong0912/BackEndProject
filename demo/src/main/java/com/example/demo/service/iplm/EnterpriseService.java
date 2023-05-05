@@ -24,8 +24,8 @@ public class EnterpriseService implements IEnterpriseService {
     }
 
     @Override
-    public void add(Enterprise enterprise) {
-        iEnterpriseRepository.save(enterprise);
+    public Enterprise add(Enterprise enterprise) {
+        return iEnterpriseRepository.save(enterprise);
     }
 
     @Override

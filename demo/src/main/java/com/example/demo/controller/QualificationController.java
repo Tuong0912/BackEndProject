@@ -19,11 +19,11 @@ public class QualificationController {
 
     @GetMapping
     public ResponseEntity<Iterable<Qualification>> findAll() {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(this.iQualificationService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createNewJob(@RequestBody Qualification qualification) {
+    public ResponseEntity<Qualification> createNewJob(@RequestBody Qualification qualification) {
         this.iQualificationService.add(qualification);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -34,7 +34,7 @@ public class QualificationController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<Void> updateJob(@PathVariable Long id, @RequestBody Qualification qualification) {
+    public ResponseEntity<Qualification> updateJob(@PathVariable Long id, @RequestBody Qualification qualification) {
         if (this.iQualificationService.findById(id).isPresent()) {
             this.iQualificationService.add(qualification);
             return new ResponseEntity<>(HttpStatus.OK);

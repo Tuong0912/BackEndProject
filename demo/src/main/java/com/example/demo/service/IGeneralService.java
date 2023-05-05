@@ -7,6 +7,6 @@ public interface IGeneralService<T> {
 
     Optional<T> findById(Long id);
 
-    void add(T t);
+    T add(T t);
     void delete(Long id);
 }

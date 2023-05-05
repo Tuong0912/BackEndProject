@@ -11,18 +11,18 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("programing")
+@RequestMapping("language")
 public class ProgramingController {
     @Autowired
     private IProgramingLanguageService iProgramingService;
 
     @GetMapping
     public ResponseEntity<Iterable<ProgramingLanguage>> findAll() {
-        return new ResponseEntity<>(this.iProgramingService.findAll(),HttpStatus.OK);
+        return new ResponseEntity<>(this.iProgramingService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createNewJob(@RequestBody ProgramingLanguage language) {
+    public ResponseEntity<ProgramingLanguage> createNewJob(@RequestBody ProgramingLanguage language) {
         this.iProgramingService.add(language);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -33,7 +33,7 @@ public class ProgramingController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<Void> updateJob(@PathVariable Long id, @RequestBody ProgramingLanguage language) {
+    public ResponseEntity<ProgramingLanguage> updateJob(@PathVariable Long id, @RequestBody ProgramingLanguage language) {
         if (this.iProgramingService.findById(id).isPresent()) {
             this.iProgramingService.add(language);
             return new ResponseEntity<>(HttpStatus.OK);
