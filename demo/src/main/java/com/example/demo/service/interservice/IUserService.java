@@ -7,5 +7,10 @@ import java.util.Optional;
 
 public interface IUserService extends IGeneralService<User> {
     User checkApplication(Long id);
+
     Optional<User> findByUsername(String user);
+
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);
 }
