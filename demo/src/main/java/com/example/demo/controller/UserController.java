@@ -1,55 +1,54 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.user.User;
+import com.example.demo.security.jwt.JwtProvider;
 import com.example.demo.service.interservice.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("user")
+@RequestMapping("users")
 public class UserController {
     @Autowired
-    private IUserService iUserService;
+    private IUserService userService;
 
-    @GetMapping
-    public ResponseEntity<Iterable<User>> findAll() {
-        return new ResponseEntity<>(this.iUserService.findAll(), HttpStatus.OK);
-    }
+    @Autowired
+    private JwtProvider jwtProvider;
 
-    @PostMapping
-    public ResponseEntity<User> createNewJob(@RequestBody User user) {
-        this.iUserService.add(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    @PutMapping("{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable Long id) {
-        return new ResponseEntity<>(this.iUserService.findById(id), HttpStatus.OK);
-    }
-
-    @PutMapping("update/{id}")
-    public ResponseEntity<User> updateJob(@PathVariable Long id, @RequestBody User user) {
-        if (this.iUserService.findById(id).isPresent()) {
-            this.iUserService.add(user);
-            return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<Iterable<User>> getAllUsers() {
+        List<User> users = (List<User>) userService.findAll();
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        this.iUserService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<User> updateUserInformation(@PathVariable Long id, @RequestBody User user) {
+        Optional<User> userOptional = userService.findById(id);
+        if (userOptional.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        user.setId(userOptional.get().getId());
+        return new ResponseEntity<>(userService.add(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<User> viewBook(@RequestHeader(name = "Authorization") String authorization) {
+        User user = jwtProvider.getUserFromBearer(authorization).get();
+        return ResponseEntity.ok(user);
     }
 
     @PatchMapping("check/{id}")
     public ResponseEntity<User> checkApplication(@PathVariable Long id) {
-        User user = this.iUserService.checkApplication(id);
+        User user = this.userService.checkApplication(id);
         if (user.isaBoolean()) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }else {

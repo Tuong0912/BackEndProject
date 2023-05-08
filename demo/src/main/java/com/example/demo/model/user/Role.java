@@ -8,8 +8,9 @@ import javax.persistence.*;
 @Table(name = "roles")
 public class Role {
     public enum RoleType {
-        HOST, USER
+        ADMIN, HOST, USER
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +19,7 @@ public class Role {
     @NaturalId
     @Column(length = 60)
     private RoleType name;
+
     public Role() {
     }
 

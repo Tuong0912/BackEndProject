@@ -37,4 +37,9 @@ public class UserService implements IUserService {
     public User checkApplication(Long id) {
         return this.userRepository.findById(id).get();
     }
+
+    @Override
+    public Optional<User> findByUsername(String user) {
+        return userRepository.findByUsername(user);
+    }
 }
