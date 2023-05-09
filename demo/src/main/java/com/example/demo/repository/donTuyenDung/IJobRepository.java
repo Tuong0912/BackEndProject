@@ -20,6 +20,4 @@ public interface IJobRepository extends JpaRepository<Job, Long> {
                                                          @Param("minSalary") double minSalary,
                                                          @Param("maxSalary") double maxSalary);
 
-    @Query(value = "select j from Job as j where j.city.name = :city ")
-    Iterable<Job> findAllByCity(@Param("city") String city);
 }

@@ -39,10 +39,6 @@ public class JobService implements IJobService {
         return iJobRepository.findAllBySalaryBetween(minSalary, maxSalary);
     }
 
-    @Override
-    public Iterable<Job> findAllByCity(String city) {
-        return iJobRepository.findAllByCity(city);
-    }
 
     @Override
     public Iterable<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification, String city, double minSalary, double maxSalary) {
