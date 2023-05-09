@@ -1,8 +1,10 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class City {
@@ -13,21 +15,20 @@ public class City {
     @ManyToOne
     @JsonIgnore
     private Enterprise enterprise;
-    @ManyToOne
-    @JsonIgnore
-    private Job job;
+    @OneToMany(fetch = FetchType.LAZY)
+    @Lazy
+    private List<Job> job;
 
 
-
-    public Job getJob() {
+    public List<Job> getJob() {
         return job;
     }
 
-    public void setJob(Job job) {
+    public void setJob(List<Job> job) {
         this.job = job;
     }
 
-    public City(Long id, String name, Enterprise enterprise, Job job) {
+    public City(Long id, String name, Enterprise enterprise, List<Job> job) {
         this.id = id;
         this.name = name;
         this.enterprise = enterprise;

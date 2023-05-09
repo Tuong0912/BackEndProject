@@ -4,13 +4,9 @@ import com.example.demo.model.*;
 import com.example.demo.service.IGeneralService;
 
 public interface IJobService extends IGeneralService<Job> {
-    Iterable<Job> findAllByCityAndEnterpriseAndProgramingLanguageAndQualification(City city, Enterprise enterprise, ProgramingLanguage programingLanguage, Qualification qualification);
+    Iterable<Job> findAllByMinSalaryAndMaxSalary(double minSalary, double maxSalary);
 
-    Iterable<Job> findAllByCity(City city);
+    Iterable<Job> findAllByCity(String city);
 
-    Iterable<Job> findAllByEnterprise(Enterprise enterprise);
-
-    Iterable<Job> findAllByProgramingLanguage(ProgramingLanguage language);
-
-    Iterable<Job> findAllByQualification(Qualification qualification);
+    Iterable<Job> findAllByQualification(String qualification);
 }

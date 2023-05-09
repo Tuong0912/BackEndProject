@@ -19,7 +19,8 @@ public class QualificationController {
 
     @GetMapping
     public ResponseEntity<Iterable<Qualification>> findAll() {
-        return new ResponseEntity<>(this.iQualificationService.findAll(), HttpStatus.OK);
+        Iterable<Qualification> findAll = this.iQualificationService.findAll();
+        return new ResponseEntity<>(findAll, HttpStatus.OK);
     }
 
     @PostMapping

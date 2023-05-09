@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Job;
+import com.example.demo.model.Search;
 import com.example.demo.service.interservice.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,5 +49,15 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/search")
+    ResponseEntity<Iterable<Job>> search(@RequestBody Search search) {
+        return new ResponseEntity<>(this.iJobService.findAllByMinSalaryAndMaxSalary(search.getMinSalary(),
+                search.getMaxSalary()),
+                HttpStatus.OK);
+    }
 
+    @PostMapping("/qualification")
+    ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search) {
+        return new ResponseEntity<>(this.iJobService.findAllByQualification(search.getQualification()), HttpStatus.OK);
+    }
 }

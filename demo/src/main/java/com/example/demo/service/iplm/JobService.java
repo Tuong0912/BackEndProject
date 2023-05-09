@@ -35,27 +35,17 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public Iterable<Job> findAllByCityAndEnterpriseAndProgramingLanguageAndQualification(City city, Enterprise enterprise, ProgramingLanguage programingLanguage, Qualification qualification) {
-        return iJobRepository.findAllByCityAndEnterpriseAndProgramingLanguageAndQualification(city, enterprise, programingLanguage, qualification);
+    public Iterable<Job> findAllByMinSalaryAndMaxSalary(double minSalary, double maxSalary) {
+        return iJobRepository.findAllBySalaryBetween(minSalary, maxSalary);
     }
 
     @Override
-    public Iterable<Job> findAllByCity(City city) {
+    public Iterable<Job> findAllByCity(String city) {
         return iJobRepository.findAllByCity(city);
     }
 
     @Override
-    public Iterable<Job> findAllByEnterprise(Enterprise enterprise) {
-        return iJobRepository.findAllByEnterprise(enterprise);
-    }
-
-    @Override
-    public Iterable<Job> findAllByProgramingLanguage(ProgramingLanguage language) {
-        return iJobRepository.findAllByProgramingLanguage(language);
-    }
-
-    @Override
-    public Iterable<Job> findAllByQualification(Qualification qualification) {
+    public Iterable<Job> findAllByQualification(String qualification) {
         return iJobRepository.findAllByQualification(qualification);
     }
 }

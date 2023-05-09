@@ -16,17 +16,13 @@ public class Job {
     private Long id;
     @ManyToOne
     private Enterprise enterprise;
-
-    private double minSalary;
-    private double maxSalary;
+    private double salary;
     private LocalDate postDate;
     private LocalDate expriteDate;
     private String experience;
     private String content;
-
     private String shortDescription;
     private String longDescription;
-
     private String src;
     private Boolean status = false;
     @ManyToOne
@@ -40,11 +36,10 @@ public class Job {
     public Job() {
     }
 
-    public Job(Long id, Enterprise enterprise, double minSalary, double maxSalary, LocalDate postDate, LocalDate expriteDate, String experience, String content, String shortDescription, String longDescription, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
+    public Job(Long id, Enterprise enterprise, double salary, LocalDate postDate, LocalDate expriteDate, String experience, String content, String shortDescription, String longDescription, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
         this.id = id;
         this.enterprise = enterprise;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
+        this.salary = salary;
         this.postDate = postDate;
         this.expriteDate = expriteDate;
         this.experience = experience;
@@ -75,20 +70,12 @@ public class Job {
     }
 
 
-    public double getMinSalary() {
-        return minSalary;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setMinSalary(double minSalary) {
-        this.minSalary = minSalary;
-    }
-
-    public double getMaxSalary() {
-        return maxSalary;
-    }
-
-    public void setMaxSalary(double maxSalary) {
-        this.maxSalary = maxSalary;
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     public LocalDate getPostDate() {
