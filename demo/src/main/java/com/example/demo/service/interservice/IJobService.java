@@ -8,5 +8,5 @@ public interface IJobService extends IGeneralService<Job> {
 
     Iterable<Job> findAllByCity(String city);
 
-    Iterable<Job> findAllByQualification(String qualification);
+    public Iterable<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification, String city, double minSalary, double maxSalary);
 }

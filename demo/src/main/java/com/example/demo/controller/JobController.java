@@ -58,6 +58,10 @@ public class JobController {
 
     @PostMapping("/qualification")
     ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search) {
-        return new ResponseEntity<>(this.iJobService.findAllByQualification(search.getQualification()), HttpStatus.OK);
+        return new ResponseEntity<>(this.iJobService.findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(search.getQualification(),
+                search.getCity(),
+                search.getMinSalary(),
+                search.getMaxSalary()),
+                HttpStatus.OK);
     }
 }
