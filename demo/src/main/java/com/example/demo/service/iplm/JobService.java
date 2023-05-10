@@ -4,6 +4,8 @@ import com.example.demo.model.*;
 import com.example.demo.repository.donTuyenDung.IJobRepository;
 import com.example.demo.service.interservice.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -43,5 +45,10 @@ public class JobService implements IJobService {
     @Override
     public Iterable<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification, String city, double minSalary, double maxSalary) {
         return iJobRepository.findAllByQualificationAndCityAndSalary(qualification, city, minSalary, maxSalary);
+    }
+
+    @Override
+    public Page<Job> findAllJob(Pageable pageable) {
+        return iJobRepository.findAll(pageable);
     }
 }
