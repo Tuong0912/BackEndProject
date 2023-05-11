@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -43,12 +44,31 @@ public class JobService implements IJobService {
 
 
     @Override
-    public Iterable<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification, String city, double minSalary, double maxSalary) {
-        return iJobRepository.findAllByQualificationAndCityAndSalary(qualification, city, minSalary, maxSalary);
+    public Page<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification,
+                                                                                        String city,
+                                                                                        double minSalary,
+                                                                                        double maxSalary,
+                                                                                        Pageable pageable) {
+        return iJobRepository.findAllByQualificationAndCityAndSalary(qualification, city, minSalary, maxSalary, pageable);
     }
 
     @Override
     public Page<Job> findAllJob(Pageable pageable) {
         return iJobRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Job> findAllJobWhichTrue(Pageable pageable) {
+        return iJobRepository.findAllByStatusIsTrue(pageable);
+    }
+
+    @Override
+    public Page<Job> findAllJobWhichFalse(Pageable pageable) {
+        return iJobRepository.findAllByStatusIsFalse(pageable);
+    }
+
+    @Override
+    public int browseJob(long id) {
+        return iJobRepository.browseAJob(id);
     }
 }

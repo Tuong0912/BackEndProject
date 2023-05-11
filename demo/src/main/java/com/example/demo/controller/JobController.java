@@ -28,6 +28,7 @@ public class JobController {
     @PostMapping
     public ResponseEntity<Job> createNewJob(@RequestBody Job job) {
         job.setPostDate(java.time.LocalDate.now());
+        job.setStatus(false);
         this.iJobService.add(job);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -60,17 +61,28 @@ public class JobController {
     }
 
     @PostMapping("/qualification")
-    ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search) {
+    ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search, @PageableDefault(value = 3) Pageable pageable) {
         return new ResponseEntity<>(this.iJobService.findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(search.getQualification(),
                 search.getCity(),
                 search.getMinSalary(),
-                search.getMaxSalary()),
+                search.getMaxSalary(),
+                pageable),
                 HttpStatus.OK);
     }
 
+    @GetMapping("findAllTrue")
+    ResponseEntity<Page<Job>> findAllJobWhichTrue(@PageableDefault(value = 3) Pageable pageable) {
+        return new ResponseEntity<>(this.iJobService.findAllJobWhichTrue(pageable), HttpStatus.OK);
+    }
 
-    @GetMapping("findAll")
-    ResponseEntity<Page<Job>> findAllJob(@PageableDefault(value = 1) Pageable pageable) {
-        return new ResponseEntity<>(this.iJobService.findAllJob(pageable), HttpStatus.OK);
+    @GetMapping("findAllFalse")
+    ResponseEntity<Page<Job>> findAllJobWhichFalse(@PageableDefault(value = 3) Pageable pageable) {
+        return new ResponseEntity<>(this.iJobService.findAllJobWhichFalse(pageable), HttpStatus.OK);
+    }
+
+    @PostMapping("/browse/{id}")
+    ResponseEntity<Optional<Job>> browseAJob(@PathVariable long id) {
+            iJobService.browseJob(id);
+            return new ResponseEntity<>(HttpStatus.OK);
     }
 }
