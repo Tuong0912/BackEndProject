@@ -44,18 +44,14 @@ public class JobService implements IJobService {
 
 
     @Override
-    public Page<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification,
+    public Iterable<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification,
                                                                                         String city,
                                                                                         double minSalary,
-                                                                                        double maxSalary,
-                                                                                        Pageable pageable) {
-        return iJobRepository.findAllByQualificationAndCityAndSalary(qualification, city, minSalary, maxSalary, pageable);
+                                                                                        double maxSalary) {
+        return iJobRepository.findAllByQualificationAndCityAndSalary(qualification, city, minSalary, maxSalary);
     }
 
-    @Override
-    public Page<Job> findAllJob(Pageable pageable) {
-        return iJobRepository.findAll(pageable);
-    }
+
 
     @Override
     public Page<Job> findAllJobWhichTrue(Pageable pageable) {
@@ -70,5 +66,15 @@ public class JobService implements IJobService {
     @Override
     public int browseJob(long id) {
         return iJobRepository.browseAJob(id);
+    }
+
+    @Override
+    public Iterable<Job> findTopByRecruitments() {
+        return iJobRepository.findTopByRecruitments();
+    }
+
+    @Override
+    public Iterable<Job> selectRandomFromJob() {
+        return iJobRepository.selectRandomFromJob();
     }
 }

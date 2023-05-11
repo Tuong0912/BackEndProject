@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -16,6 +14,8 @@ public class Job {
     private Long id;
     @ManyToOne
     private Enterprise enterprise;
+
+    private int numberRecruitments;
     private double salary;
     private LocalDate postDate;
     private LocalDate expriteDate;
@@ -36,9 +36,10 @@ public class Job {
     public Job() {
     }
 
-    public Job(Long id, Enterprise enterprise, double salary, LocalDate postDate, LocalDate expriteDate, String experience, String content, String shortDescription, String longDescription, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
+    public Job(Long id, Enterprise enterprise, int numberRecruitments, double salary, LocalDate postDate, LocalDate expriteDate, String experience, String content, String shortDescription, String longDescription, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
         this.id = id;
         this.enterprise = enterprise;
+        this.numberRecruitments = numberRecruitments;
         this.salary = salary;
         this.postDate = postDate;
         this.expriteDate = expriteDate;
@@ -68,7 +69,6 @@ public class Job {
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
     }
-
 
     public double getSalary() {
         return salary;
@@ -164,5 +164,13 @@ public class Job {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public int getNumberRecruitments() {
+        return numberRecruitments;
+    }
+
+    public void setNumberRecruitments(int numberRecruitments) {
+        this.numberRecruitments = numberRecruitments;
     }
 }

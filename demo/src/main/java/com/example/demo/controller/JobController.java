@@ -61,12 +61,11 @@ public class JobController {
     }
 
     @PostMapping("/qualification")
-    ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search, @PageableDefault(value = 3) Pageable pageable) {
+    ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search) {
         return new ResponseEntity<>(this.iJobService.findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(search.getQualification(),
                 search.getCity(),
                 search.getMinSalary(),
-                search.getMaxSalary(),
-                pageable),
+                search.getMaxSalary()),
                 HttpStatus.OK);
     }
 
@@ -82,7 +81,18 @@ public class JobController {
 
     @PostMapping("/browse/{id}")
     ResponseEntity<Optional<Job>> browseAJob(@PathVariable long id) {
-            iJobService.browseJob(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+        iJobService.browseJob(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("showTop")
+    ResponseEntity<Iterable<Job>> showTopRecruitments() {
+        return new ResponseEntity<>(iJobService.findTopByRecruitments(), HttpStatus.OK);
+    }
+
+    @PostMapping("selectRandom")
+    ResponseEntity<Iterable<Job>> selectRandomFromJob() {
+        return new ResponseEntity<>(iJobService.selectRandomFromJob(), HttpStatus.OK);
+    }
+
 }
