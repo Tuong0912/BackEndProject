@@ -1,4 +1,4 @@
-package com.example.demo.repository.donTuyenDung;
+package com.example.demo.repository.job;
 
 import com.example.demo.model.Qualification;
 import org.springframework.data.jpa.repository.JpaRepository;

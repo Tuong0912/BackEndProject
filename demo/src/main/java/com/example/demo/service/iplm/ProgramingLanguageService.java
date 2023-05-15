@@ -1,7 +1,7 @@
 package com.example.demo.service.iplm;
 
 import com.example.demo.model.ProgramingLanguage;
-import com.example.demo.repository.donTuyenDung.IProgramingLanguageRepo;
+import com.example.demo.repository.job.IProgramingLanguageRepo;
 import com.example.demo.service.interservice.IProgramingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.example.demo.service.iplm;
 
 import com.example.demo.model.Enterprise;
-import com.example.demo.repository.doanhNghiep.IEnterpriseRepository;
+import com.example.demo.repository.enterprise.IEnterpriseRepository;
 import com.example.demo.service.interservice.IEnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

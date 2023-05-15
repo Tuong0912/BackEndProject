@@ -20,7 +20,7 @@ public class User {
 
     @NotBlank
     @Size(min = 6, max = 50)
-    private String fullName;
+    private String fullname;
 
     @NotBlank
     @Size(min = 6, max = 32)
@@ -37,33 +37,26 @@ public class User {
     private String phone;
 
     private String address;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    Set<Role> roles = new HashSet<>();
-
     private boolean aBoolean;
 
     public User() {
     }
 
-    public User(Long id, String fullName, String username, String password, String email, String phone, String address, Set<Role> roles, boolean aBoolean) {
+    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean) {
         this.id = id;
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.roles = roles;
+
         this.aBoolean = aBoolean;
     }
 
     public User(
             @NotBlank
-            @Size(min = 6, max = 50) String fullName,
+            @Size(min = 6, max = 50) String fullname,
             @NotBlank
             @Size(min = 6, max = 32) String username,
             @NotBlank
@@ -72,7 +65,7 @@ public class User {
             @Size(min = 10, max = 15) String phone,
             String address
     ) {
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -89,12 +82,12 @@ public class User {
     }
 
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUsername() {
@@ -137,13 +130,6 @@ public class User {
         this.address = address;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 
     public boolean isaBoolean() {
         return aBoolean;

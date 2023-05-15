@@ -1,4 +1,4 @@
-package com.example.demo.repository.donTuyenDung;
+package com.example.demo.repository.job;
 
 import com.example.demo.model.*;
 import org.springframework.data.domain.Page;
@@ -10,8 +10,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.Optional;
 
 @Repository
 @Transactional

@@ -1,7 +1,7 @@
 package com.example.demo.service.iplm;
 
 import com.example.demo.model.Qualification;
-import com.example.demo.repository.donTuyenDung.IQualificationRepo;
+import com.example.demo.repository.job.IQualificationRepo;
 import com.example.demo.service.interservice.IQualificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

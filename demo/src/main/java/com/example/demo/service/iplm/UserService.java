@@ -52,4 +52,9 @@ public class UserService implements IUserService {
         return userRepository.existsByEmail(email);
     }
 
+    @Override
+    public Boolean findByUsernameAndPassword(String username, String password) {
+        Boolean user = this.userRepository.findByUsernameAndPassword(username, password);
+        return user;
+    }
 }
