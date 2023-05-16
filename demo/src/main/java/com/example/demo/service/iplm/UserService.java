@@ -4,6 +4,8 @@ import com.example.demo.model.user.User;
 import com.example.demo.repository.user.UserRepository;
 import com.example.demo.service.interservice.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -39,7 +41,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<User> findByUsername(String user) {
+    public User findByUsername(String user) {
         return userRepository.findByUsername(user);
     }
 
@@ -56,5 +58,15 @@ public class UserService implements IUserService {
     public Boolean findByUsernameAndPassword(String username, String password) {
         Boolean user = this.userRepository.findByUsernameAndPassword(username, password);
         return user;
+    }
+
+    @Override
+    public Page<User> findAllUserWhichFalse(Pageable pageable) {
+        return userRepository.findAllByABooleanIsFalse(pageable);
+    }
+
+    @Override
+    public User findByUserEmail(String email) {
+        return userRepository.findByUserEmail(email);
     }
 }

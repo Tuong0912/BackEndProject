@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Job;
+import com.example.demo.model.job.Job;
 import com.example.demo.model.Search;
 import com.example.demo.service.interservice.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +40,8 @@ public class JobController {
 
     @PutMapping("update/{id}")
     public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job job) {
-        if (this.iJobService.findById(id).isPresent()) {
-            this.iJobService.add(job);
+        if (iJobService.findById(id).isPresent()) {
+            iJobService.add(job);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -49,20 +49,20 @@ public class JobController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
-        this.iJobService.delete(id);
+        iJobService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/search")
     ResponseEntity<Iterable<Job>> search(@RequestBody Search search) {
-        return new ResponseEntity<>(this.iJobService.findAllByMinSalaryAndMaxSalary(search.getMinSalary(),
+        return new ResponseEntity<>(iJobService.findAllByMinSalaryAndMaxSalary(search.getMinSalary(),
                 search.getMaxSalary()),
                 HttpStatus.OK);
     }
 
     @PostMapping("/qualification")
     ResponseEntity<Iterable<Job>> searchByQualification(@RequestBody Search search) {
-        return new ResponseEntity<>(this.iJobService.findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(search.getQualification(),
+        return new ResponseEntity<>(iJobService.findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(search.getQualification(),
                 search.getCity(),
                 search.getMinSalary(),
                 search.getMaxSalary()),
@@ -71,12 +71,12 @@ public class JobController {
 
     @GetMapping("findAllTrue")
     ResponseEntity<Page<Job>> findAllJobWhichTrue(@PageableDefault(value = 3) Pageable pageable) {
-        return new ResponseEntity<>(this.iJobService.findAllJobWhichTrue(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(iJobService.findAllJobWhichTrue(pageable), HttpStatus.OK);
     }
 
     @GetMapping("findAllFalse")
     ResponseEntity<Page<Job>> findAllJobWhichFalse(@PageableDefault(value = 3) Pageable pageable) {
-        return new ResponseEntity<>(this.iJobService.findAllJobWhichFalse(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(iJobService.findAllJobWhichFalse(pageable), HttpStatus.OK);
     }
 
     @PostMapping("/browse/{id}")

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.ProgramingLanguage;
+import com.example.demo.model.job.ProgramingLanguage;
 import com.example.demo.service.interservice.IProgramingLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

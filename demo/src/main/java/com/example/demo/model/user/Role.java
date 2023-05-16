@@ -1,17 +1,20 @@
-package com.example.demo.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.example.demo.model.user;
 
 import javax.persistence.*;
 
 @Entity
-public class ProgramingLanguage {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    public ProgramingLanguage() {
+    public Role() {
+    }
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
@@ -20,11 +23,6 @@ public class ProgramingLanguage {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ProgramingLanguage(Long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public String getName() {

@@ -1,6 +1,6 @@
 package com.example.demo.repository.job;
 
-import com.example.demo.model.*;
+import com.example.demo.model.job.Job;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,9 +26,6 @@ public interface IJobRepository extends JpaRepository<Job, Long> {
                                                          @Param("minSalary") double minSalary,
                                                          @Param("maxSalary") double maxSalary);
 
-    @Query(value = "select j from Job as j where j.status is true")
-    Page<Job> findAllByStatusIsTrue(Pageable pageable);
-
     @Query(value = "select j from Job as j where j.status is false ")
     Page<Job> findAllByStatusIsFalse(Pageable pageable);
 
@@ -43,4 +40,10 @@ public interface IJobRepository extends JpaRepository<Job, Long> {
     @Modifying
     @Query(value = "select * from job where status = true order by rand() limit 1", nativeQuery = true)
     Iterable<Job> selectRandomFromJob();
+
+    @Query(value = "select j from Job as j where j.status is true")
+    Page<Job> findAllByStatusIsTrue(Pageable pageable);
+    @Query(value = "select * from job where  ", nativeQuery = true)
+    Page<Job> showListUser(Pageable pageable);
+
 }

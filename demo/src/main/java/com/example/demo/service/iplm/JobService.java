@@ -1,6 +1,6 @@
 package com.example.demo.service.iplm;
 
-import com.example.demo.model.*;
+import com.example.demo.model.job.Job;
 import com.example.demo.repository.job.IJobRepository;
 import com.example.demo.service.interservice.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;

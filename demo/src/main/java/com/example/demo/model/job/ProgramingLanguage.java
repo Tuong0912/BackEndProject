@@ -1,27 +1,17 @@
-package com.example.demo.model;
+package com.example.demo.model.job;
 
-import org.springframework.context.annotation.Lazy;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 @Entity
-@Table
-public class Qualification {
+public class ProgramingLanguage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    public Qualification(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public Qualification(String name) {
-        this.name = name;
-    }
-
-    public Qualification() {
+    public ProgramingLanguage() {
     }
 
     public Long getId() {
@@ -30,6 +20,11 @@ public class Qualification {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ProgramingLanguage(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {

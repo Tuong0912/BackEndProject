@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.model.Qualification;
+import com.example.demo.model.job.Qualification;
 import com.example.demo.service.interservice.IQualificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

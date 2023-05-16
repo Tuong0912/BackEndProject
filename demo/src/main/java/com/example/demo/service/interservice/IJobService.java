@@ -1,11 +1,9 @@
 package com.example.demo.service.interservice;
 
-import com.example.demo.model.*;
+import com.example.demo.model.job.Job;
 import com.example.demo.service.IGeneralService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import java.util.Optional;
 
 public interface IJobService extends IGeneralService<Job> {
     Iterable<Job> findAllByMinSalaryAndMaxSalary(double minSalary, double maxSalary);

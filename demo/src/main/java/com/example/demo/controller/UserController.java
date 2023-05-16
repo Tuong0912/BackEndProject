@@ -1,16 +1,22 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.login.LoginRequest;
 import com.example.demo.model.user.User;
 import com.example.demo.service.interservice.IUserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -18,7 +24,6 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private IUserService userService;
-
 
 
     @GetMapping("")
@@ -53,8 +58,8 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
-        if (userService.findByUsername(user.getUsername()).isPresent()) {
-            return ResponseEntity.badRequest().body("User name already exists");
+        if (userService.findByUserEmail(user.getEmail()) != null) {
+            return ResponseEntity.badRequest().body("Email already exists");
         } else {
             userService.add(user);
             return ResponseEntity.ok().body("User register successfully");
@@ -62,13 +67,37 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user, HttpServletResponse response) {
-        if(userService.findByUsernameAndPassword(user.getUsername(), user.getPassword())) {
-            Cookie cookie = new Cookie("user", user.getUsername());
-            cookie.setMaxAge(30*60);
-            cookie.setHttpOnly(true);
-            response.addCookie(cookie);
-            return ResponseEntity.ok("Login success");
-        }else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User userLogin) {
+        Map<String, Object> hasMap = new HashMap<>();
+        String text;
+        User user = userService.findByUserEmail(userLogin.getEmail());
+        if (user == null) {
+            text = "Email không tông tại";
+            hasMap.put("text", text);
+            return new ResponseEntity<>(hasMap, HttpStatus.OK);
+        } else {
+            if (user.getPassword().equals(userLogin.getPassword())) {
+                text = "đăng nhập thành công";
+                hasMap.put("text", text);
+                hasMap.put("user1234567890", user);
+                return new ResponseEntity<>(hasMap, HttpStatus.OK);
+            } else {
+                text = "mật khẩu không đúng";
+                hasMap.put("text", text);
+                return new ResponseEntity<>(hasMap, HttpStatus.OK);
+            }
+        }
+
+
+    }
+
+    @GetMapping("findAllFalse")
+    public ResponseEntity<Page<User>> findAllWhichFalse(@PageableDefault(value = 3) Pageable pageable) {
+        return new ResponseEntity<>(userService.findAllUserWhichFalse(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
     }
 }

@@ -18,11 +18,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Size(min = 6, max = 50)
     private String fullname;
 
-    @NotBlank
+
     @Size(min = 6, max = 32)
     private String username;
 
@@ -38,11 +37,13 @@ public class User {
 
     private String address;
     private boolean aBoolean;
+    @ManyToOne
+    private Role role;
 
     public User() {
     }
 
-    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean) {
+    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean, Role roles) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
@@ -50,8 +51,8 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.address = address;
-
         this.aBoolean = aBoolean;
+        this.role = roles;
     }
 
     public User(
@@ -63,7 +64,8 @@ public class User {
             @Size(min = 6, max = 8) String password,
             @Size(max = 50) String email,
             @Size(min = 10, max = 15) String phone,
-            String address
+            String address,
+            Role roles
     ) {
         this.fullname = fullname;
         this.username = username;
@@ -71,6 +73,7 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.role = roles;
     }
 
     public Long getId() {
@@ -137,6 +140,14 @@ public class User {
 
     public void setaBoolean(boolean aBoolean) {
         this.aBoolean = aBoolean;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
 

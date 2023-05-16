@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.example.demo.model.job.Job;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.context.annotation.Lazy;
 

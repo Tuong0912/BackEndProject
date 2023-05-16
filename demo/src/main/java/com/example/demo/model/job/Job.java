@@ -1,6 +1,7 @@
-package com.example.demo.model;
+package com.example.demo.model.job;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.demo.model.City;
+import com.example.demo.model.Enterprise;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
