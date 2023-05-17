@@ -1,5 +1,7 @@
 package com.example.demo.model.user;
 
+import com.example.demo.model.Enterprise;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -37,13 +39,15 @@ public class User {
 
     private String address;
     private boolean aBoolean;
+    @OneToOne(mappedBy = "user")
+    private Enterprise enterprise;
     @ManyToOne
     private Role role;
 
     public User() {
     }
 
-    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean, Role roles) {
+    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean, Role roles, Enterprise enterprise) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
@@ -53,6 +57,7 @@ public class User {
         this.address = address;
         this.aBoolean = aBoolean;
         this.role = roles;
+        this.enterprise = enterprise;
     }
 
     public User(
@@ -65,7 +70,8 @@ public class User {
             @Size(max = 50) String email,
             @Size(min = 10, max = 15) String phone,
             String address,
-            Role roles
+            Role roles,
+            Enterprise enterprise
     ) {
         this.fullname = fullname;
         this.username = username;
@@ -74,16 +80,17 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.role = roles;
+        this.enterprise = enterprise;
     }
 
     public Long getId() {
         return id;
     }
 
+
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getFullname() {
         return fullname;
@@ -133,7 +140,6 @@ public class User {
         this.address = address;
     }
 
-
     public boolean isaBoolean() {
         return aBoolean;
     }
@@ -148,6 +154,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 }
 

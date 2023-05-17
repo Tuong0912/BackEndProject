@@ -1,8 +1,11 @@
 package com.example.demo.model;
 
+import com.example.demo.model.user.User;
+
 import javax.persistence.*;
 
 @Entity
+@Table
 public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +16,9 @@ public class Enterprise {
     private String phoneNumber;
     private String avatar;
     private Boolean status = false;
-
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Enterprise(Long id, String name, String address, String gmail, String phoneNumber, String avatar, Boolean status) {
         this.id = id;

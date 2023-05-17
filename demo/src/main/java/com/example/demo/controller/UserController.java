@@ -72,17 +72,17 @@ public class UserController {
         String text;
         User user = userService.findByUserEmail(userLogin.getEmail());
         if (user == null) {
-            text = "Email không tông tại";
+            text = "Email không tồn tại";
             hasMap.put("text", text);
             return new ResponseEntity<>(hasMap, HttpStatus.OK);
         } else {
             if (user.getPassword().equals(userLogin.getPassword())) {
-                text = "đăng nhập thành công";
+                text = "Đăng nhập thành công";
                 hasMap.put("text", text);
                 hasMap.put("user1234567890", user);
                 return new ResponseEntity<>(hasMap, HttpStatus.OK);
             } else {
-                text = "mật khẩu không đúng";
+                text = "Mật khẩu không đúng";
                 hasMap.put("text", text);
                 return new ResponseEntity<>(hasMap, HttpStatus.OK);
             }
