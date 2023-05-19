@@ -69,4 +69,9 @@ public class UserService implements IUserService {
     public User findByUserEmail(String email) {
         return userRepository.findByUserEmail(email);
     }
+
+    @Override
+    public int browseAUser(long id) {
+        return userRepository.browseAUser(id);
+    }
 }

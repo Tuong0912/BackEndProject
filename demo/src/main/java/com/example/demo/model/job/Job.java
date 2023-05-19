@@ -2,10 +2,13 @@ package com.example.demo.model.job;
 
 import com.example.demo.model.City;
 import com.example.demo.model.Enterprise;
+import com.example.demo.model.user.User;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -15,7 +18,6 @@ public class Job {
     private Long id;
     @ManyToOne
     private Enterprise enterprise;
-
     private int numberRecruitments;
     private double salary;
     private LocalDate postDate;
@@ -33,6 +35,7 @@ public class Job {
     @ManyToOne
     @Lazy
     private City city;
+
 
     public Job() {
     }
@@ -174,4 +177,5 @@ public class Job {
     public void setNumberRecruitments(int numberRecruitments) {
         this.numberRecruitments = numberRecruitments;
     }
+
 }

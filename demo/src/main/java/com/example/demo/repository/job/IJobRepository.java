@@ -43,7 +43,6 @@ public interface IJobRepository extends JpaRepository<Job, Long> {
 
     @Query(value = "select j from Job as j where j.status is true")
     Page<Job> findAllByStatusIsTrue(Pageable pageable);
-    @Query(value = "select * from job where  ", nativeQuery = true)
-    Page<Job> showListUser(Pageable pageable);
+
 
 }

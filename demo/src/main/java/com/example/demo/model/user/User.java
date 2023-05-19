@@ -1,12 +1,14 @@
 package com.example.demo.model.user;
 
 import com.example.demo.model.Enterprise;
+import com.example.demo.model.job.Job;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,10 +46,13 @@ public class User {
     @ManyToOne
     private Role role;
 
+    @OneToMany
+    private List<Job> jobs;
+
     public User() {
     }
 
-    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean, Role roles, Enterprise enterprise) {
+    public User(Long id, String fullname, String username, String password, String email, String phone, String address, boolean aBoolean, Enterprise enterprise, Role role, List<Job> jobs) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
@@ -56,8 +61,9 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.aBoolean = aBoolean;
-        this.role = roles;
         this.enterprise = enterprise;
+        this.role = role;
+        this.jobs = jobs;
     }
 
     public User(
@@ -71,7 +77,8 @@ public class User {
             @Size(min = 10, max = 15) String phone,
             String address,
             Role roles,
-            Enterprise enterprise
+            Enterprise enterprise,
+            List<Job> jobs
     ) {
         this.fullname = fullname;
         this.username = username;
@@ -81,6 +88,7 @@ public class User {
         this.address = address;
         this.role = roles;
         this.enterprise = enterprise;
+        this.jobs = jobs;
     }
 
     public Long getId() {
@@ -162,6 +170,14 @@ public class User {
 
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
+    }
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 }
 

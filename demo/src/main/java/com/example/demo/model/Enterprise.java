@@ -20,6 +20,9 @@ public class Enterprise {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    private City city;
+
     public Enterprise(Long id, String name, String address, String gmail, String phoneNumber, String avatar, Boolean status) {
         this.id = id;
         this.name = name;

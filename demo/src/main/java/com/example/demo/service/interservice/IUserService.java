@@ -21,4 +21,6 @@ public interface IUserService extends IGeneralService<User> {
     Boolean findByUsernameAndPassword(String username, String password);
 
     Page<User> findAllUserWhichFalse(Pageable pageable);
+
+    int browseAUser(long id);
 }

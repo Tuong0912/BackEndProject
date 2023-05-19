@@ -13,27 +13,11 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne
-    @JsonIgnore
-    private Enterprise enterprise;
-    @OneToMany(fetch = FetchType.LAZY)
-    @Lazy
-    private List<Job> job;
 
 
-    public List<Job> getJob() {
-        return job;
-    }
-
-    public void setJob(List<Job> job) {
-        this.job = job;
-    }
-
-    public City(Long id, String name, Enterprise enterprise, List<Job> job) {
+    public City(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.enterprise = enterprise;
-        this.job = job;
     }
 
     public City() {
@@ -53,14 +37,6 @@ public class City {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Enterprise getEnterprise() {
-        return enterprise;
-    }
-
-    public void setEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
     }
 
 
