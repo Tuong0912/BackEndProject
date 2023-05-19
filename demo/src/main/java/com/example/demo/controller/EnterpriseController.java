@@ -4,6 +4,9 @@ import com.example.demo.model.City;
 import com.example.demo.model.Enterprise;
 import com.example.demo.service.interservice.IEnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +22,8 @@ public class EnterpriseController {
     private IEnterpriseService iEnterpriseService;
 
     @GetMapping()
-    ResponseEntity<Iterable<Enterprise>> findAll() {
-        return new ResponseEntity<>(iEnterpriseService.findAll(), HttpStatus.OK);
+    ResponseEntity<Page<Enterprise>> findAll(@PageableDefault(value = 3) Pageable pageable) {
+        return new ResponseEntity<>(iEnterpriseService.findAllEnterPrise(pageable), HttpStatus.OK);
     }
 
     @PostMapping("create")

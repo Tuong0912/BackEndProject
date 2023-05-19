@@ -4,6 +4,8 @@ import com.example.demo.model.Enterprise;
 import com.example.demo.repository.enterprise.IEnterpriseRepository;
 import com.example.demo.service.interservice.IEnterpriseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -31,5 +33,10 @@ public class EnterpriseService implements IEnterpriseService {
     @Override
     public void delete(Long id) {
         iEnterpriseRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Enterprise> findAllEnterPrise(Pageable pageable) {
+        return iEnterpriseRepository.findAllEnterPrise(pageable);
     }
 }
