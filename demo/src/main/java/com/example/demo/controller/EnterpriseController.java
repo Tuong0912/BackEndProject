@@ -51,4 +51,10 @@ public class EnterpriseController {
         this.iEnterpriseService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PostMapping("browse/{id}")
+    public ResponseEntity<Optional<Enterprise>> browseAEnterprise(@PathVariable long id) {
+        iEnterpriseService.browseAEnterprise(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

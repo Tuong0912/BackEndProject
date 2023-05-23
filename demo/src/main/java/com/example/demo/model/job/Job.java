@@ -3,6 +3,7 @@ package com.example.demo.model.job;
 import com.example.demo.model.City;
 import com.example.demo.model.Enterprise;
 import com.example.demo.model.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
@@ -35,12 +36,17 @@ public class Job {
     @ManyToOne
     @Lazy
     private City city;
+    @ManyToMany(mappedBy = "jobs")
+    private List<User> users;
 
 
     public Job() {
     }
 
-    public Job(Long id, Enterprise enterprise, int numberRecruitments, double salary, LocalDate postDate, LocalDate expriteDate, String experience, String content, String shortDescription, String longDescription, String src, Boolean status, Qualification qualification, ProgramingLanguage programingLanguage, City city) {
+    public Job(Long id, Enterprise enterprise, int numberRecruitments, double salary, LocalDate postDate,
+               LocalDate expriteDate, String experience, String content, String shortDescription,
+               String longDescription, String src, Boolean status, Qualification qualification,
+               ProgramingLanguage programingLanguage, City city, List<User> users) {
         this.id = id;
         this.enterprise = enterprise;
         this.numberRecruitments = numberRecruitments;
@@ -56,6 +62,7 @@ public class Job {
         this.qualification = qualification;
         this.programingLanguage = programingLanguage;
         this.city = city;
+        this.users = users;
     }
 
     public Long getId() {
@@ -178,4 +185,12 @@ public class Job {
         this.numberRecruitments = numberRecruitments;
     }
 
+
+    public List<User> getUser() {
+        return users;
+    }
+
+    public void setUser(List<User> user) {
+        this.users = users;
+    }
 }

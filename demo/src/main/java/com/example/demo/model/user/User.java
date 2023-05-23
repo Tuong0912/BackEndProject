@@ -2,6 +2,7 @@ package com.example.demo.model.user;
 
 import com.example.demo.model.Enterprise;
 import com.example.demo.model.job.Job;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -41,13 +42,18 @@ public class User {
 
     private String address;
     private boolean aBoolean;
-    @OneToOne(mappedBy = "user")
+    @OneToOne
+    @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
     @ManyToOne
     private Role role;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "user_job",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "job_id"))
     private List<Job> jobs;
+
 
     public User() {
     }

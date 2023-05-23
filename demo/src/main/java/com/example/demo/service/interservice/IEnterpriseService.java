@@ -8,5 +8,5 @@ import org.springframework.data.domain.Pageable;
 public interface IEnterpriseService extends IGeneralService<Enterprise> {
     Page<Enterprise> findAllEnterPrise(Pageable pageable);
 
-
+    int browseAEnterprise(long id);
 }

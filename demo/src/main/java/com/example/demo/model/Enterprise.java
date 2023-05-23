@@ -16,8 +16,7 @@ public class Enterprise {
     private String phoneNumber;
     private String avatar;
     private Boolean status = false;
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "enterprise")
     private User user;
 
     @ManyToOne

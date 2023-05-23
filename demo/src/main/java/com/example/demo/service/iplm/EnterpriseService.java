@@ -39,4 +39,10 @@ public class EnterpriseService implements IEnterpriseService {
     public Page<Enterprise> findAllEnterPrise(Pageable pageable) {
         return iEnterpriseRepository.findAllEnterPrise(pageable);
     }
+
+
+    @Override
+    public int browseAEnterprise(long id) {
+        return iEnterpriseRepository.browseAEnterprise(id);
+    }
 }
