@@ -26,6 +26,11 @@ public class EnterpriseController {
         return new ResponseEntity<>(iEnterpriseService.findAllEnterPrise(pageable), HttpStatus.OK);
     }
 
+    @GetMapping("findAll")
+    ResponseEntity<Iterable<Enterprise>> findAllEnterprise() {
+        return new ResponseEntity<>(iEnterpriseService.findAll(), HttpStatus.OK);
+    }
+
     @PostMapping("create")
     ResponseEntity<Enterprise> addNewEnterprise(@RequestBody Enterprise enterprise) {
         this.iEnterpriseService.add(enterprise);
