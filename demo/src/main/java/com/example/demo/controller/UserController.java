@@ -43,6 +43,17 @@ public class UserController {
         return new ResponseEntity<>(userService.add(user), HttpStatus.OK);
     }
 
+    @PostMapping("updateUser/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody User user) {
+        if (userService.findById(id).isPresent()) {
+            user.setaBoolean(true);
+            user.setId(id);
+            this.userService.add(user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @PatchMapping("check/{id}")
     public ResponseEntity<User> checkApplication(@PathVariable Long id) {
         User user = this.userService.checkApplication(id);
