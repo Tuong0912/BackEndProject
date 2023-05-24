@@ -35,6 +35,7 @@ public class JobController {
 
     @PutMapping("{id}")
     public ResponseEntity<Optional<Job>> findById(@PathVariable Long id) {
+        this.iJobService.findById(id);
         return new ResponseEntity<>(this.iJobService.findById(id), HttpStatus.OK);
     }
 

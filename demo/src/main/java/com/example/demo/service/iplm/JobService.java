@@ -1,13 +1,16 @@
 package com.example.demo.service.iplm;
 
 import com.example.demo.model.job.Job;
+import com.example.demo.model.user.User;
 import com.example.demo.repository.job.IJobRepository;
+import com.example.demo.repository.user.UserRepository;
 import com.example.demo.service.interservice.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +18,9 @@ public class JobService implements IJobService {
 
     @Autowired
     private IJobRepository iJobRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Iterable<Job> findAll() {
@@ -44,12 +50,11 @@ public class JobService implements IJobService {
 
     @Override
     public Iterable<Job> findAllByQualificationAndCityAndSalaryBetweenMinSalaryAndMaxSalary(String qualification,
-                                                                                        String city,
-                                                                                        double minSalary,
-                                                                                        double maxSalary) {
+                                                                                            String city,
+                                                                                            double minSalary,
+                                                                                            double maxSalary) {
         return iJobRepository.findAllByQualificationAndCityAndSalary(qualification, city, minSalary, maxSalary);
     }
-
 
 
     @Override
@@ -76,4 +81,19 @@ public class JobService implements IJobService {
     public Iterable<Job> selectRandomFromJob() {
         return iJobRepository.selectRandomFromJob();
     }
+
+
+//    @Override
+//    public void applyJobs(User user, List<Long> jobIds) {
+//        List<Job> jobs = iJobRepository.findAllById(jobIds);
+//        user.getJobs().addAll(jobs);
+//        userRepository.save(user);
+//    }
+//
+//    @Override
+//    public User getCurrentUser() {
+//        return null;
+//    }
+//
+
 }

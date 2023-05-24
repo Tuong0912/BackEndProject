@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -101,7 +102,6 @@ public class User {
         return id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -184,6 +184,13 @@ public class User {
 
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
+    }
+
+    public void addAll(List<Job> newJobs) {
+        if (jobs == null) {
+            jobs = new ArrayList<>();
+        }
+        jobs.addAll(newJobs);
     }
 }
 
