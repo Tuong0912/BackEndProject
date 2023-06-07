@@ -30,6 +30,7 @@ dependencies {
     implementation      'javax.validation:validation-api:2.0.1.Final'
     implementation      'org.hibernate:hibernate-validator:6.2.5.Final'
     implementation      'commons-fileupload:commons-fileupload:1.5'
+    implementation 'org.jsoup:jsoup:1.15.3'
 }
 
 tasks.named('test') {

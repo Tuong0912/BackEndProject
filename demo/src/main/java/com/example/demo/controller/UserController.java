@@ -143,36 +143,36 @@ public class UserController {
 //        }
 //    }
 
-    @PostMapping("/{userId}/jobs/{jobId}/apply")
-    public ResponseEntity<String> applyJob(@PathVariable Long userId, @PathVariable Long jobId) {
-        Optional<User> optionalUser = userService.findById(userId);
-        Optional<Job> optionalJob = iJobService.findById(jobId);
+//    @PostMapping("/{userId}/jobs/{jobId}/apply")
+//    public ResponseEntity<String> applyJob(@PathVariable Long userId, @PathVariable Long jobId) {
+//        Optional<User> optionalUser = userService.findById(userId);
+//        Optional<Job> optionalJob = iJobService.findById(jobId);
+//
+//        if (optionalUser.isPresent() && optionalJob.isPresent()) {
+//            User user = optionalUser.get();
+//            Job job = optionalJob.get();
+//
+//            if (!user.getJobs().contains(job)) {
+//                user.getJobs().add(job);
+//                userService.add(user);
+//                return ResponseEntity.ok("Applied successfully");
+//            } else {
+//                return ResponseEntity.badRequest().body("Already applied for this job");
+//            }
+//        }
+//
+//        return ResponseEntity.notFound().build();
+//    }
 
-        if (optionalUser.isPresent() && optionalJob.isPresent()) {
-            User user = optionalUser.get();
-            Job job = optionalJob.get();
-
-            if (!user.getJobs().contains(job)) {
-                user.getJobs().add(job);
-                userService.add(user);
-                return ResponseEntity.ok("Applied successfully");
-            } else {
-                return ResponseEntity.badRequest().body("Already applied for this job");
-            }
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-
-    @GetMapping("/{userId}/jobs")
-    public ResponseEntity<List<Job>> getAppliedJobs(@PathVariable Long userId) {
-        User user = userService.findById(userId).orElse(null);
-
-        if (user == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        List<Job> userJobs = user.getJobs();
-        return ResponseEntity.ok(userJobs);
-    }
+//    @GetMapping("/{userId}/jobs")
+//    public ResponseEntity<List<Job>> getAppliedJobs(@PathVariable Long userId) {
+//        User user = userService.findById(userId).orElse(null);
+//
+//        if (user == null) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//
+//        List<Job> userJobs = user.getJobs();
+//        return ResponseEntity.ok(userJobs);
+//    }
 }
